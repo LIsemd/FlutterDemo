@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'model/post.dart';
+import './demo/drawer_demo.dart';
+import './demo/botton_navigation_bar.dart';
+import './demo/listview_demo.dart';
 
 void main() => runApp(App());
 
@@ -7,62 +9,57 @@ class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       home: Home(),
-      theme: ThemeData(primaryColor: Colors.amberAccent),
+      theme: ThemeData(
+          primaryColor: Colors.yellow,
+          highlightColor: Color.fromRGBO(255, 255, 255, 0.5),
+          splashColor: Colors.white70
+      ),
     );
   }
 }
 
 class Home extends StatelessWidget {
-  Widget _listItemBuilder(BuildContext context, int index) {
-    return Container(
-      color: Colors.white,
-      margin: EdgeInsets.all(8.0),
-      child: Column(
-        children: <Widget>[
-          Image.network(posts[index].imageUrl),
-          SizedBox(height: 16.0,),
-          Text(
-            posts[index].title,
-            style: Theme.of(context).textTheme.title,
+  @override
+  Widget build(BuildContext context) {
+    return DefaultTabController(
+      length: 3,
+      child: Scaffold(
+        backgroundColor: Colors.grey[100],
+        appBar: AppBar(
+          title: Text('Demo'),
+          centerTitle: true,
+          actions: <Widget>[
+            IconButton(
+              icon: Icon(Icons.search),
+              tooltip: 'Search',
+              onPressed: null,
+            )
+          ],
+          elevation: 0.0,
+          bottom: TabBar(
+            unselectedLabelColor: Colors.black38,
+            indicatorColor: Colors.black54,
+            indicatorSize: TabBarIndicatorSize.label,
+            indicatorWeight: 1.0,
+            tabs: <Widget>[
+              Tab(icon: Icon(Icons.local_airport)),
+              Tab(icon: Icon(Icons.local_activity)),
+              Tab(icon: Icon(Icons.directions_bike)),
+            ],
           ),
-          Text(
-            posts[index].author,
-            style: Theme.of(context).textTheme.subhead,
-          ),
-          SizedBox(height: 16.0,)
-        ],
+        ),
+        body: TabBarView(
+          children: <Widget>[
+            ListViewDemo(),
+            Icon(Icons.local_activity, size: 128.0, color: Colors.black12),
+            Icon(Icons.directions_bike, size: 128.0, color: Colors.black12)
+          ],
+        ),
+        drawer: DrawerDemo(),
+        bottomNavigationBar: BottomNavigationBarDemo(),
       ),
     );
   }
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-        appBar: AppBar(
-          title: Text('Demo'),
-          elevation: 0.0,
-        ),
-        body: ListView.builder(
-            itemCount: posts.length,
-            itemBuilder: _listItemBuilder
-        ));
-  }
 }
-
-//class Hello extends StatelessWidget {
-//  @override
-//  Widget build(BuildContext context) {
-//    return Center(
-//      child: Text(
-//        'Hello',
-//        textDirection: TextDirection.ltr,
-//        style: TextStyle(
-//            fontSize: 40.0,
-//            fontWeight: FontWeight.bold,
-//            color: Colors.deepOrange
-//        ),
-//      ),
-//    );
-//  }
-//}
