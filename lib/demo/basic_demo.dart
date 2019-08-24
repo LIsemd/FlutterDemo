@@ -8,7 +8,7 @@ class BasicDemo extends StatelessWidget {
       decoration: BoxDecoration(
         image: DecorationImage(
           image: NetworkImage('http://pic.netbian.com/uploads/allimg/190524/213312-155870479257e3.jpg'),
-          alignment: Alignment.topCenter,
+//          alignment: Alignment.topCenter,
 //          repeat: ImageRepeat.repeat
           fit: BoxFit.cover,
           colorFilter: ColorFilter.mode(Colors.indigoAccent[100].withOpacity(0.5), BlendMode.hardLight)
