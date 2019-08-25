@@ -4,18 +4,22 @@ class FormDemo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: Theme(
-      data: Theme.of(context).copyWith(primaryColor: Colors.black),
-      child: Container(
-        padding: EdgeInsets.all(16.0),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            RegisterForm(),
-          ],
+        appBar: AppBar(
+          title: Text('Form'),
+          elevation: 0.0,
         ),
-      ),
-    ));
+        body: Theme(
+          data: Theme.of(context).copyWith(primaryColor: Colors.black),
+          child: Container(
+            padding: EdgeInsets.all(16.0),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                RegisterForm(),
+              ],
+            ),
+          ),
+        ));
   }
 }
 
@@ -34,11 +38,9 @@ class _RegisterFormState extends State<RegisterForm> {
       registerFormKey.currentState.save();
 //      debugPrint('username: $username');
 //      debugPrint('password: $password');
-      Scaffold.of(context).showSnackBar(
-        SnackBar(
-          content: Text('Registering...'),
-        )
-      );
+      Scaffold.of(context).showSnackBar(SnackBar(
+        content: Text('Registering...'),
+      ));
     } else {
       setState(() {
         autovalidate = true;
